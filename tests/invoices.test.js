@@ -56,7 +56,7 @@ describe("GET /invoices", () => {
                 "comp_code": "apple",
                 "amt": 100,
                 "paid": false,
-                "add_date": "2021-08-18T05:00:00.000Z",
+                "add_date": expect.anything(),
                 "paid_date": null
               },
               {
@@ -64,7 +64,7 @@ describe("GET /invoices", () => {
                 "comp_code": "apple",
                 "amt": 200,
                 "paid": false,
-                "add_date": "2021-08-18T05:00:00.000Z",
+                "add_date": expect.anything(),
                 "paid_date": null
               },
               {
@@ -72,7 +72,7 @@ describe("GET /invoices", () => {
                 "comp_code": "apple",
                 "amt": 300,
                 "paid": true,
-                "add_date": "2021-08-18T05:00:00.000Z",
+                "add_date": expect.anything(),
                 "paid_date": "2018-01-01T06:00:00.000Z"
               },
               {
@@ -80,7 +80,7 @@ describe("GET /invoices", () => {
                 "comp_code": "ibm",
                 "amt": 400,
                 "paid": false,
-                "add_date": "2021-08-18T05:00:00.000Z",
+                "add_date": expect.anything(),
                 "paid_date": null
               },
             ]
@@ -99,7 +99,7 @@ describe("GET /invoices/:id", () => {
               "comp_code": "apple",
               "amt": 100,
               "paid": false,
-              "add_date": "2021-08-18T05:00:00.000Z",
+              "add_date": expect.anything(),
               "paid_date": null
             }
           })
@@ -127,7 +127,7 @@ describe("POST /invoices", function() {
               "comp_code": "apple",
               "amt": 123,
               "paid": false,
-              "add_date": "2021-08-18T05:00:00.000Z",
+              "add_date": expect.anything(),
               "paid_date": null
             }
           });
@@ -148,7 +148,7 @@ describe("PUT /invoices/:id", function() {
               "comp_code": "apple",
               "amt": 555,
               "paid": false,
-              "add_date": "2021-08-18T05:00:00.000Z",
+              "add_date": expect.anything(),
               "paid_date": null
             }
           });

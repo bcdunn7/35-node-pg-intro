@@ -1,6 +1,5 @@
 process.env.NODE_ENV = 'test';
 
-const { hasUncaughtExceptionCaptureCallback } = require('process');
 const request = require('supertest');
 
 const app = require('../app');
@@ -72,7 +71,7 @@ describe("GET /companies/:code", () => {
                   "comp_code": "apple",
                   "amt": 100,
                   "paid": false,
-                  "add_date": "2021-08-18T05:00:00.000Z",
+                  "add_date": expect.anything(),
                   "paid_date": null
                 },
                 {
@@ -80,7 +79,7 @@ describe("GET /companies/:code", () => {
                   "comp_code": "apple",
                   "amt": 200,
                   "paid": false,
-                  "add_date": "2021-08-18T05:00:00.000Z",
+                  "add_date": expect.anything(),
                   "paid_date": null
                 },
                 {
@@ -88,8 +87,8 @@ describe("GET /companies/:code", () => {
                   "comp_code": "apple",
                   "amt": 300,
                   "paid": true,
-                  "add_date": "2021-08-18T05:00:00.000Z",
-                  "paid_date": "2018-01-01T06:00:00.000Z"
+                  "add_date": expect.anything(),
+                  "paid_date": expect.anything()
                 }
               ]
             }
@@ -108,7 +107,6 @@ describe("POST /companies", function() {
         const response = await request(app)
             .post(`/companies`)
             .send({
-            code: "tesla",
             name: "Tesla",
             description: "Car company"
             });
