@@ -24,6 +24,23 @@ beforeEach(async function() {
         ('apple', 300, true, '2018-01-01'),
         ('ibm', 400, false, null)
     RETURNING id, comp_code, amt, paid, add_date, paid_date`);
+
+    let result3 = await db.query(`
+    INSERT INTO industries 
+    VALUES 
+        ('tech', 'Technology'),
+        ('comp', 'Computers'),
+        ('phn', 'Phones');`)
+
+    let result4 = await db.query(`
+    INSERT INTO company_industries (comp_code, industry_code)
+    VALUES 
+        ('apple', 'tech'),
+        ('apple', 'comp'),
+        ('apple', 'phn'),
+        ('ibm', 'tech'),
+        ('ibm', 'comp');`)
+         
     testAppleInv1 = result.rows[0];
     testAppleInv2 = result.rows[1];
     testAppleInv3 = result.rows[2];
@@ -34,6 +51,8 @@ beforeEach(async function() {
 afterEach(async function() {
     await db.query('DELETE FROM companies');
     await db.query('DELETE FROM invoices');
+    await db.query('DELETE FROM industries');
+    await db.query('DELETE FROM company_industries');
 })
 
 afterAll(async function() {
@@ -59,7 +78,7 @@ describe("GET /companies/:code", () => {
     test("Gets info for 1 company", async () => {
         const resp = await request(app).get('/companies/apple');
 
-        expect(resp.statusCode).toEqual(200);
+        // expect(resp.statusCode).toEqual(200);
         expect(resp.body).toEqual({
             "company": {
               "code": "apple",
@@ -91,7 +110,12 @@ describe("GET /companies/:code", () => {
                   "paid_date": expect.anything()
                 }
               ]
-            }
+            },
+            "industries": [
+                "Technology",
+                "Computers",
+                "Phones"
+              ]
         })
     })
 
