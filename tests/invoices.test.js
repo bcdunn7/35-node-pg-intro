@@ -135,11 +135,12 @@ describe("POST /invoices", function() {
 });
 
 describe("PUT /invoices/:id", function() {
-    test("Updates a single invoice", async function() {
+    test("Updates a single invoice amt", async function() {
         const response = await request(app)
             .put(`/invoices/${testAppleInv1.id}`)
             .send({
-            amt: "555"
+            amt: "555",
+            paid: false
             });
         expect(response.statusCode).toEqual(200);
         expect(response.body).toEqual({
@@ -153,6 +154,26 @@ describe("PUT /invoices/:id", function() {
             }
           });
     });
+
+    test("Updates paid from false to true", async function() {
+        const response = await request(app)
+			.put(`/invoices/${testAppleInv1.id}`)
+            .send({
+            amt: "606",
+            paid: true
+            });
+        expect(response.statusCode).toEqual(200);
+        expect(response.body).toEqual({
+            "invoice": {
+              "id": expect.any(Number),
+              "comp_code": "apple",
+              "amt": 606,
+              "paid": true,
+              "add_date": expect.anything(),
+              "paid_date": expect.anything()
+            }
+          });
+    })
   
     test("Responds with 404 if can't find invoice", async function() {
         const response = await request(app).put(`/invoices/12341234`);
