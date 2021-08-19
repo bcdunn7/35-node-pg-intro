@@ -13,7 +13,10 @@ const compRoutes = require('./routes/companies');
 app.use('/companies', compRoutes);
 
 const invRoutes = require('./routes/invoices');
-app.use('/invoices', invRoutes)
+app.use('/invoices', invRoutes);
+
+const indRoutes = require('./routes/industries');
+app.use('/industries', indRoutes);
 
 
 /** 404 handler */
